@@ -5,6 +5,7 @@ const moment = require('moment');
 const {userJoin, GetCurrentUser, userLeave, getRoomUsers} = require('./utils/users');
 const e = require('express');
 const server = require('http').createServer(app);
+const port = process.env.PORT || 50000
 
 const io = require('socket.io')(server);
 const publicPath = path.join(__dirname, '/../public');
@@ -84,6 +85,6 @@ io.on('connection', (socket)=>{
     })
 });
 
-server.listen(5000, ()=>{
+server.listen(port, ()=>{
     console.log('Server is listening at port 5000...');
 });
