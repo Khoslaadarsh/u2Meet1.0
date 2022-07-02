@@ -68,7 +68,9 @@ function createPeerConnection() {
     myPeerConnection.ontrack = handleTrackEvent;
     myPeerConnection.onremovetrack = handleRemoveTrackEvent;
     myPeerConnection.onconnectionstatechange = ()=>{
-        console.log('CONNECTION ESTABLISHED....................................................................');
+
+        console.log('CONNECTION ESTABLISHED......................', myPeerConnection.iceConnectionState);
+        
         
     }
     myPeerConnection.oniceconnectionstatechange = handleICEConnectionStateChangeEvent;
