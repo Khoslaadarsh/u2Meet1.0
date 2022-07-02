@@ -95,11 +95,11 @@ function handleNegotiationNeededEvent() {
 
     socket.on('video-answer', async msg=>{
         if(msg.type){
-            console.log('recieving video-answer');
-            console.log(msg.sdp);
+            // console.log('recieving video-answer');
+            // console.log(msg.sdp);
             
             const remoteDesc = new RTCSessionDescription(msg.sdp);
-            console.log(remoteDesc);
+            // console.log(remoteDesc);
             await myPeerConnection.setRemoteDescription(remoteDesc);
         }
         
@@ -140,9 +140,11 @@ function handleICECandidateEvent(event) {
 
 
 function handleTrackEvent(event) {
-    console.log('settingup REMOTE video', event);
+    // console.log('settingup REMOTE video', event);
 
     document.getElementById("received_video").srcObject = event.streams[0];
+    console.log(event.streams[0]);
+    console.log(document.getElementById("received_video").srcObject);
     document.getElementById("hangup").disabled = false;
   }
 
