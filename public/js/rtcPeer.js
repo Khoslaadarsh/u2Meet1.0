@@ -143,7 +143,7 @@ function handleTrackEvent(event) {
     // console.log('settingup REMOTE video', event);
 
     document.getElementById("received_video").srcObject = event.streams[0];
-    console.log(event.streams[0]);
+    
     console.log(document.getElementById("received_video").srcObject);
     document.getElementById("hangup").disabled = false;
   }
