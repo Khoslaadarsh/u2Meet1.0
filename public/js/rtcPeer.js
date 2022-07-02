@@ -166,7 +166,10 @@ function handleTrackEvent(event) {
 function closeVideoCall() {
     var remoteVideo = document.getElementById("received_video");
     var localVideo = document.getElementById("local_video");
-    
+    console.log('closing the call');
+    console.log(remoteVideo.srcObject);
+    console.log(localVideo.srcObject);
+
     if (myPeerConnection) {
       myPeerConnection.ontrack = null;
       myPeerConnection.onremovetrack = null;
@@ -199,6 +202,7 @@ function closeVideoCall() {
   }
 //   IceConnectionStagechange
 function handleICEConnectionStateChangeEvent(event) {
+    console.log("I am at handleICEConnectionStateChaneEvent", myPeerConnection.iceConnectionState);
     switch(myPeerConnection.iceConnectionState) {
       case "closed":
       case "failed":
@@ -210,6 +214,7 @@ function handleICEConnectionStateChangeEvent(event) {
 
 // ICE signaling state
 function handleSignalingStateChangeEvent(event) {
+  console.log("I am at handleSignalingStateChangeEvent", myPeerConnection.iceConnectionState);
     switch(myPeerConnection.signalingState) {
       case "closed":
         closeVideoCall();
@@ -225,6 +230,7 @@ function handleICEGatheringStateChangeEvent(event) {
 //   HANGUP THE CALL
 
 function hangUpCall() {
+  console.log('hangup button clicked');
     closeVideoCall();
     socket.emit('hangup-Call', {
         name: usrName,
