@@ -53,9 +53,12 @@ function createPeerConnection() {
     myPeerConnection = new RTCPeerConnection({
         iceServers: [     // Information about ICE servers - Use your own!
           {
-            urls: ["stun:stun01.sipphone.com"]
+            urls: ['stun:stun01.sipphone.com', 'stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302', 'stun:stun3.l.google.com:19302'
+                  , 'stun:stun4.l.google.com:19302', 'stun:stun.l.google.com:19302', 'stun:stun.ekiga.net', 'stun:stun.fwdnet.net'
+          ]
           }
-        ]
+        ],
+        iceCandidatePoolSize: 10
     });
 
     // console.log("rtc peer 61");
@@ -92,11 +95,11 @@ function handleNegotiationNeededEvent() {
 
     socket.on('video-answer', async msg=>{
         if(msg.type){
-            // console.log('recieving video-answer');
-            // console.log(msg.sdp);
+            console.log('recieving video-answer');
+            console.log(msg.sdp);
             
             const remoteDesc = new RTCSessionDescription(msg.sdp);
-            // console.log(remoteDesc);
+            console.log(remoteDesc);
             await myPeerConnection.setRemoteDescription(remoteDesc);
         }
         
@@ -137,7 +140,7 @@ function handleICECandidateEvent(event) {
 
 
 function handleTrackEvent(event) {
-    // console.log('settingup REMOTE video');
+    console.log('settingup REMOTE video', event);
 
     document.getElementById("received_video").srcObject = event.streams[0];
     document.getElementById("hangup").disabled = false;
