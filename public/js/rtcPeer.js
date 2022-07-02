@@ -51,13 +51,18 @@ function handleGetUserMediaError(e) {
 // Creating peer connection
 function createPeerConnection() {
     myPeerConnection = new RTCPeerConnection({
-        iceServers: [     // Information about ICE servers - Use your own!
-          {
-            urls: ['stun:stun01.sipphone.com', 'stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302', 'stun:stun3.l.google.com:19302'
-                  , 'stun:stun4.l.google.com:19302', 'stun:stun.l.google.com:19302', 'stun:stun.ekiga.net', 'stun:stun.fwdnet.net'
-          ]
-          }
-        ],
+      iceServers: [{ urls: [ "stun:bn-turn1.xirsys.com" ]}, { 
+        username: "98kUmqEHEFU9SSoWtZeRftns1PUwgGQRJ2joDaZdYBb7jBjg3NVRVfp0LmmRXrDeAAAAAGLAgqpqb2hudGVtcG91Mm1lZXQ=", 
+        credential: "d5922444-fa2d-11ec-a4aa-0242ac140004", 
+        urls: [ "turn:bn-turn1.xirsys.com:80?transport=udp",  
+                "turn:bn-turn1.xirsys.com:3478?transport=udp", 
+                "turn:bn-turn1.xirsys.com:80?transport=tcp",
+                "turn:bn-turn1.xirsys.com:3478?transport=tcp", 
+                "turns:bn-turn1.xirsys.com:443?transport=tcp", 
+                "turns:bn-turn1.xirsys.com:5349?transport=tcp" 
+              ]
+            }
+          ],
         iceCandidatePoolSize: 10
     });
 
